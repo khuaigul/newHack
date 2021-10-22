@@ -2,20 +2,6 @@
 #include "classes.h"
 using namespace std;
 
-template<class T>
-void input(string file, vector<T>& data)
-{
-	ifstream in_file(file);
-	int sz = 0;
-	string str;
-	while(in_file >> str)
-	{
-		data.push_back(T());
-		data[sz++].parse(str);
-	}	
-	in_file.close();	
-}
-
 void static_input(string file, void (*parse)(string row))
 {
 	ifstream in_file(file);

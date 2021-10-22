@@ -2,6 +2,19 @@
 #include "classes.h"
 using namespace std;
 
+int Aircraft_Classes::regional;
+int Aircraft_Classes::narrow;
+int Aircraft_Classes::wide;
+int Handling_Time::regional_jet;
+int Handling_Time::regional_away;
+int Handling_Time::narrow_jet;
+int Handling_Time::narrow_away;
+int Handling_Time::wide_jet;
+int Handling_Time::wide_away;
+int Taxes::Bus_Cost_per_Minute;
+int Taxes::Away_Aircraft_Stand_Cost_per_Minute;
+int Taxes::JetBridge_Aircraft_Stand_Cost_per_Minute;
+int Taxes::Aircraft_Taxiing_Cost_per_Minute;
 
 int main()
 {

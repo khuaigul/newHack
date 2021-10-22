@@ -1,44 +1,54 @@
-#ifndef CLASSES
-#define CLASSES
+#ifndef CLASSES_H
+#define CLASSES_H
 #include <bits/stdc++.h>
 using namespace std;
 
-
 template<class T>
-void input(string file, vector<T>& data);
+void input(string file, vector<T>& data)
+{
+	ifstream in_file(file);
+	int sz = 0;
+	string str;
+	while(in_file >> str)
+	{
+		data.push_back(T());
+		data[sz++].parse(str);
+	}	
+	in_file.close();	
+}
 
 void static_input(string file, void (*parse)(string row));
+
 struct Aircraft_Classes
-{
+{	
 	static int regional;
 	static int narrow;
 	static int wide;
 
 	static void parse(string row)
-		{
-	if (row[0] == 'A')
-		return;
-	bool id = 0;
-	string name = "";
-	string buf = "";
-	for (int i = 0; i < (int)row.size(); i++)
 	{
-		if (row[i] == ',')
-			id = 1;
-		else if (id == 0)
+		if (row[0] == 'A')
+			return;
+		bool id = 0;
+		string name = "";
+		string buf = "";
+		for (int i = 0; i < (int)row.size(); i++)
 		{
-			name += row[i];	
-		}
-		else
-		{
-			buf += row[i];
-		}
-	}	
-	if(name == "Regional") regional = stoi(buf);
-	else if(name == "Narrow_Body") narrow = stoi(buf);
-	else wide = stoi(buf);
-}
-
+			if (row[i] == ',')
+				id = 1;
+			else if (id == 0)
+			{
+				name += row[i];	
+			}
+			else
+			{
+				buf += row[i];
+			}
+		}	
+		if(name == "Regional") regional = stoi(buf);
+		else if(name == "Narrow_Body") narrow = stoi(buf);
+		else wide = stoi(buf);
+	}
 };
 
 struct Handling_Time
