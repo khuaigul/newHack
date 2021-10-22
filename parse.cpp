@@ -3,8 +3,7 @@
 using namespace std;
 
 void static_input(string file, void (*parse)(string row))
-{
-	cout << file << endl;
+{	
 	ifstream in_file(file);
 	string str;
 	getline(in_file, str);
@@ -241,9 +240,26 @@ void Aircraft_Classes::parse(string row)
 		{
 			buf += row[i];
 		}
-	}	
-	cout << name << " " << buf << endl;
+	}		
 	if(name == "Regional") regional = atoi(buf.c_str());
 	else if(name == "Narrow_Body") narrow = atoi(buf.c_str());
 	else wide = atoi(buf.c_str());
+}
+
+bool Plane::operator<(Plane& p2)
+{	
+	Plane p1 = (*this);
+	if(p1.flight_datatime.year < p2.flight_datatime.year) return true;
+	if(p1.flight_datatime.year > p2.flight_datatime.year) return 0;
+	if(p1.flight_datatime.month < p2.flight_datatime.month) return true;
+	if(p1.flight_datatime.month > p2.flight_datatime.month) return 0;
+	if(p1.flight_datatime.day < p2.flight_datatime.day) return true;
+	if(p1.flight_datatime.day > p2.flight_datatime.day) return 0;
+	if(p1.flight_datatime.hour < p2.flight_datatime.hour) return true;
+	if(p1.flight_datatime.hour > p2.flight_datatime.hour) return 0;
+	if(p1.flight_datatime.minute < p2.flight_datatime.minute) return true;
+	if(p1.flight_datatime.minute > p2.flight_datatime.minute) return 0;
+	if(p1.flight_datatime.second < p2.flight_datatime.second) return true;
+	if(p1.flight_datatime.second > p2.flight_datatime.second) return 0;
+	return false;
 }

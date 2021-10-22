@@ -87,8 +87,9 @@ struct Plane
 	int flight_PAX;
 	int Aircraft_Stand;
 	Plane_Type plane_type;
-
+	
 	void parse(string row);
+	bool operator<(Plane& p2);
 };
 
 struct Stand
