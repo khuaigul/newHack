@@ -9,7 +9,8 @@ void input(string file, vector<T>& data)
 	ifstream in_file(file);
 	int sz = 0;
 	string str;
-	while(in_file >> str)
+	getline(in_file, str);
+	while(getline(in_file, str))
 	{
 //		cout << (int)str.size() << endl;
 		if ((int)str.size() == 0)
@@ -28,30 +29,7 @@ struct Aircraft_Classes
 	static int narrow;
 	static int wide;
 
-	static void parse(string row)
-	{
-		if (row[0] == 'A')
-			return;
-		bool id = 0;
-		string name = "";
-		string buf = "";
-		for (int i = 0; i < (int)row.size(); i++)
-		{
-			if (row[i] == ',')
-				id = 1;
-			else if (id == 0)
-			{
-				name += row[i];	
-			}
-			else
-			{
-				buf += row[i];
-			}
-		}	
-		if(name == "Regional") regional = stoi(buf);
-		else if(name == "Narrow_Body") narrow = stoi(buf);
-		else wide = stoi(buf);
-	}
+	static void parse(string row);
 };
 
 struct Handling_Time
@@ -62,7 +40,7 @@ struct Handling_Time
 	static int narrow_away;
 	static int wide_jet;
 	static int wide_away;
-
+	                                                          
 	static void parse(string row);
 };
 

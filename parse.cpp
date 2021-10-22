@@ -4,9 +4,11 @@ using namespace std;
 
 void static_input(string file, void (*parse)(string row))
 {
+	cout << file << endl;
 	ifstream in_file(file);
 	string str;
-	while(in_file >> str)	
+	getline(in_file, str);
+	while(getline(in_file, str))	
 		if ((int)str.size() != 0)
 			parse(str);
 	in_file.close();	
@@ -28,10 +30,9 @@ void Stand::parse(string row)
 				JetBridge_on_Arrival = buf[0];
 			else if (num == 2)
 				JetBridge_on_Departure = buf[0];
-			else if (num == 3)
-				for (int j = 1; j <= 5; j++)
-					Time_To_Terminal[j] = atoi(buf.c_str());
-			else if (num == 4)
+			else if (num < 8)				
+				Time_To_Terminal[num - 2] = atoi(buf.c_str());
+			else if (num == 8)
 				Terminal = atoi(buf.c_str());
 			buf = "";	
 			num++;
@@ -143,14 +144,14 @@ void Handling_Time::parse(string row)
 {
 	if(row[0] == 'A')
 		return;
-	bool id = 0;
+	int id = 0;
 	string name = "";
 	string jet = "";
 	string away = "";
 	for (int i = 0; i < (int)row.size(); i++)
 	{
 		if (row[i] == ',')
-			id = 1;
+			id ++;
 		else if (id == 0)
 		{
 			name += row[i];	
@@ -205,4 +206,44 @@ void Taxes::parse(string row)
 	else if(name == "JetBridge_Aircraft_Stand_Cost_per_Minute")
 		JetBridge_Aircraft_Stand_Cost_per_Minute = atoi(buf.c_str());
 	else Aircraft_Taxiing_Cost_per_Minute = atoi(buf.c_str());
+}
+
+int Aircraft_Classes::regional;
+int Aircraft_Classes::narrow;
+int Aircraft_Classes::wide;
+int Handling_Time::regional_jet;
+int Handling_Time::regional_away;
+int Handling_Time::narrow_jet;
+int Handling_Time::narrow_away;
+int Handling_Time::wide_jet;
+int Handling_Time::wide_away;
+int Taxes::Bus_Cost_per_Minute;
+int Taxes::Away_Aircraft_Stand_Cost_per_Minute;
+int Taxes::JetBridge_Aircraft_Stand_Cost_per_Minute;
+int Taxes::Aircraft_Taxiing_Cost_per_Minute;
+
+void Aircraft_Classes::parse(string row)
+{
+	if (row[0] == 'A')
+		return;
+	bool id = 0;
+	string name = "";
+	string buf = "";
+	for (int i = 0; i < (int)row.size(); i++)
+	{
+		if (row[i] == ',')
+			id = 1;
+		else if (id == 0)
+		{
+			name += row[i];	
+		}
+		else
+		{
+			buf += row[i];
+		}
+	}	
+	cout << name << " " << buf << endl;
+	if(name == "Regional") regional = atoi(buf.c_str());
+	else if(name == "Narrow_Body") narrow = atoi(buf.c_str());
+	else wide = atoi(buf.c_str());
 }
