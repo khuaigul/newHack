@@ -11,6 +11,9 @@ void input(string file, vector<T>& data)
 	string str;
 	while(in_file >> str)
 	{
+//		cout << (int)str.size() << endl;
+		if ((int)str.size() == 0)
+			continue;
 		data.push_back(T());
 		data[sz++].parse(str);
 	}	

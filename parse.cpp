@@ -6,8 +6,9 @@ void static_input(string file, void (*parse)(string row))
 {
 	ifstream in_file(file);
 	string str;
-	while(in_file >> str)
-		parse(str);
+	while(in_file >> str)	
+		if ((int)str.size() != 0)
+			parse(str);
 	in_file.close();	
 }
 
@@ -22,16 +23,16 @@ void Stand::parse(string row)
 		if(row[i] == ',')
 		{
 			if (num == 0)
-				Aircraft_Stand = stoi(buf);
+				Aircraft_Stand = atoi(buf.c_str());
 			else if (num == 1)
 				JetBridge_on_Arrival = buf[0];
 			else if (num == 2)
 				JetBridge_on_Departure = buf[0];
 			else if (num == 3)
 				for (int j = 1; j <= 5; j++)
-					Time_To_Terminal[j] = stoi(buf);
+					Time_To_Terminal[j] = atoi(buf.c_str());
 			else if (num == 4)
-				Terminal = stoi(buf);
+				Terminal = atoi(buf.c_str());
 			buf = "";	
 			num++;
 		}
@@ -40,7 +41,7 @@ void Stand::parse(string row)
 			buf += row[i];
 		}
 	}
-	Taxiing_Time = stoi(buf);
+	Taxiing_Time = atoi(buf.c_str());
 }
 
 void Plane::parse(string row)
@@ -60,19 +61,19 @@ void Plane::parse(string row)
 			else if (num == 2)
 				flight_AL_Synchron_code = buf;
 			else if (num == 3)
-				flight_number = stoi(buf);
+				flight_number = atoi(buf.c_str());
 			else if (num == 4)
 				flight_ID = buf[0];
 			else if (num == 5)
-				flight_terminal = stoi(buf);
+				flight_terminal = atoi(buf.c_str());
 			else if (num == 6)
 				flight_AP = buf;
 			else if (num == 7)
 				flight_AC_Synchron_code = buf;
 			else if (num == 8)
-				flight_AC_PAX_capacity_total = stoi(buf);
+				flight_AC_PAX_capacity_total = atoi(buf.c_str());
 			else if (num == 9)
-				flight_PAX = stoi(buf);
+				flight_PAX = atoi(buf.c_str());
 
 			buf = "";
 			num++;
@@ -108,33 +109,33 @@ void Datatime::parse(string row)
 	{
 		if (i == 4)
 		{
-			year = stoi(buf);
+			year = atoi(buf.c_str());
 			buf = "";
 		}
 		else if (i == 7)
 		{
-			month = stoi(buf);
+			month = atoi(buf.c_str());
 			buf = "";
 		}
 		else if (i == 10)
 		{
-			day = stoi(buf);
+			day = atoi(buf.c_str());
 			buf = "";
 		}
 		else if (i == 13)
 		{
-			hour = stoi(buf);
+			hour = atoi(buf.c_str());
 			buf = "";
 		}
 		else if (i == 16)
 		{
-			minute = stoi(buf);
+			minute = atoi(buf.c_str());
 			buf = "";
 		}
 		else 
 			buf = buf + row[i];
 	}
-	second = stoi(buf);
+	second = atoi(buf.c_str());
 }
 
 
@@ -163,18 +164,18 @@ void Handling_Time::parse(string row)
 	}	
 	if(name == "Regional")
 	{
-		regional_jet = stoi(jet);
-		regional_away = stoi(away);
+		regional_jet = atoi(jet.c_str());
+		regional_away = atoi(away.c_str());
 	}
 	else if(name == "Narrow_Body")
 	{
-		narrow_jet = stoi(jet);
-		narrow_away = stoi(away);
+		narrow_jet = atoi(jet.c_str());
+		narrow_away = atoi(away.c_str());
 	}
 	else
 	{
-		wide_jet = stoi(jet);
-		wide_away = stoi(away);
+		wide_jet = atoi(jet.c_str());
+		wide_away = atoi(away.c_str());
 	}
 }
 
@@ -198,10 +199,10 @@ void Taxes::parse(string row)
 			buf += row[i];
 		}
 	}	
-	if(name == "Bus_Cost_per_Minute") Bus_Cost_per_Minute = stoi(buf);
+	if(name == "Bus_Cost_per_Minute") Bus_Cost_per_Minute = atoi(buf.c_str());
 	else if(name == "Away_Aircraft_Stand_Cost_per_Minute") 
-		Away_Aircraft_Stand_Cost_per_Minute = stoi(buf);
+		Away_Aircraft_Stand_Cost_per_Minute = atoi(buf.c_str());
 	else if(name == "JetBridge_Aircraft_Stand_Cost_per_Minute")
-		JetBridge_Aircraft_Stand_Cost_per_Minute = stoi(buf);
-	else Aircraft_Taxiing_Cost_per_Minute = stoi(buf);
+		JetBridge_Aircraft_Stand_Cost_per_Minute = atoi(buf.c_str());
+	else Aircraft_Taxiing_Cost_per_Minute = atoi(buf.c_str());
 }

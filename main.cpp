@@ -26,4 +26,9 @@ int main()
 	vector<Plane> Planes;
 	input("data_set/Timetable_Public.csv", Planes);
 
+	int sz = (int)Planes.size();
+	sz--;
+	cout << "ad " << Planes[sz-1].flight_AD << endl;
+	cout << "hour " << Planes[sz-1].flight_datatime.hour << endl;
+	cout << "name " << Planes[sz-1].plane_type.name << endl;
 }
