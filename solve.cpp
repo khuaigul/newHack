@@ -26,7 +26,7 @@ vector<int> solve(vector<Stand>& Stands, vector<Plane>& Planes)
 			if(stand.Terminal != 0 && plane.plane_type.name == "narrow") minute += Handling_Time::narrow_jet;
 			if(stand.Terminal == 0 && plane.plane_type.name == "wide") minute += Handling_Time::wide_away;
 			if(stand.Terminal != 0 && plane.plane_type.name == "wide") minute += Handling_Time::wide_jet;					
-			if(plane.flight_AD == 'D') plane.flight_datatime.minute -= minute;
+		//	if(plane.flight_AD == 'D') plane.flight_datatime.minute -= minute;
 			plane.flight_datatime.minute += stand.Taxiing_Time;
 		//	cout << was[stand.Aircraft_Stand].flight_datatime.minute << " " << plane.flight_datatime.minute << " " << cost(plane, stand) << " " << mn << endl;
 			if(was[stand.Aircraft_Stand] < plane && cost(plane, stand) < mn
@@ -41,13 +41,14 @@ vector<int> solve(vector<Stand>& Stands, vector<Plane>& Planes)
 				mn = cost(plane, stand);
 				poz = stand.Aircraft_Stand;				
 			}
-			if(plane.flight_AD == 'D') plane.flight_datatime.minute += minute;
+		//	if(plane.flight_AD == 'D') plane.flight_datatime.minute += minute;
 			plane.flight_datatime.minute -= stand.Taxiing_Time;		
 		}
-		if(plane.flight_AD == 'A')
+		plane.flight_datatime.minute += 2;
+	//	if(plane.flight_AD == 'A')
 		plane.flight_datatime.minute += bestm;		
 		was[poz] = plane;		
-		if(plane.flight_AD == 'A')
+	//	if(plane.flight_AD == 'A')
 		plane.flight_datatime.minute -= bestm;
 		ans[plane.id] = poz;
 	}
