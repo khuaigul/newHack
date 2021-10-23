@@ -138,7 +138,7 @@ void Datatime::parse(string row)
 		else 
 			buf = buf + row[i];
 	}
-	second = atoi(buf.c_str());
+	second = 0;
 }
 
 
@@ -276,7 +276,7 @@ bool Plane::operator<(Plane& p2)
 void output(string file, vector <int> position)
 {
   ifstream in_file(file);
-  ofstream out_file("./data_set/ans.csv");
+  ofstream out_file("data_set\\ans2.csv");
   string str;
   getline(in_file, str);
   out_file << str << endl;

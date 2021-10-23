@@ -14,7 +14,7 @@ vector<int> solve(vector<Stand>& Stands, vector<Plane>& Planes)
 	vector<int> ans(Planes.size());
 	for(auto plane: Planes)
 	{
-		int mn = 1000000000;
+		long long mn = 1000000000000000;
 		int poz = 0;
 		int bestm;
 		for(auto stand: Stands)
@@ -26,9 +26,8 @@ vector<int> solve(vector<Stand>& Stands, vector<Plane>& Planes)
 			if(stand.Terminal != 0 && plane.plane_type.name == "narrow") minute += Handling_Time::narrow_jet;
 			if(stand.Terminal == 0 && plane.plane_type.name == "wide") minute += Handling_Time::wide_away;
 			if(stand.Terminal != 0 && plane.plane_type.name == "wide") minute += Handling_Time::wide_jet;					
-		//	if(plane.flight_AD == 'D') plane.flight_datatime.minute -= minute;
-			plane.flight_datatime.minute += stand.Taxiing_Time;
-		//	cout << was[stand.Aircraft_Stand].flight_datatime.minute << " " << plane.flight_datatime.minute << " " << cost(plane, stand) << " " << mn << endl;
+			if(plane.flight_AD == 'D') plane.flight_datatime.minute -= minute;
+			else plane.flight_datatime.minute += stand.Taxiing_Time;						
 			if(was[stand.Aircraft_Stand] < plane && cost(plane, stand) < mn
 				&& !(plane.plane_type.name == "wide" && stand.Terminal != 0 &&
 					 was[stand.Aircraft_Stand - 1].plane_type.name == "wide" && 
@@ -41,15 +40,15 @@ vector<int> solve(vector<Stand>& Stands, vector<Plane>& Planes)
 				mn = cost(plane, stand);
 				poz = stand.Aircraft_Stand;				
 			}
-		//	if(plane.flight_AD == 'D') plane.flight_datatime.minute += minute;
-			plane.flight_datatime.minute -= stand.Taxiing_Time;		
+
+			if(plane.flight_AD == 'D') plane.flight_datatime.minute += minute;
+			else plane.flight_datatime.minute -= stand.Taxiing_Time;				
 		}
-		plane.flight_datatime.minute += 2;
-	//	if(plane.flight_AD == 'A')
+		plane.flight_datatime.minute += 1;
+		if(plane.flight_AD == 'A')
 		plane.flight_datatime.minute += bestm;		
+		else plane.flight_datatime.minute -= Stands[poz].Taxiing_Time;
 		was[poz] = plane;		
-	//	if(plane.flight_AD == 'A')
-		plane.flight_datatime.minute -= bestm;
 		ans[plane.id] = poz;
 	}
 	return ans;		
