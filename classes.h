@@ -105,5 +105,6 @@ struct Stand
 
 	void parse(string row); 
 };
+int cost(Plane plane, Stand stand);
 vector<int> solve(vector<Stand>& Stands, vector<Plane>& Planes);
 #endif
