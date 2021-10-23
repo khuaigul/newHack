@@ -5,11 +5,12 @@ using namespace std;
 
 template<class T>
 void input(string file, vector<T>& data)
-{
+{	
 	ifstream in_file(file);
 	int sz = 0;
 	string str;
 	getline(in_file, str);
+//	cout << str << endl;
 	while(getline(in_file, str))
 	{
 //		cout << (int)str.size() << endl;

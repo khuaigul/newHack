@@ -252,12 +252,12 @@ void Aircraft_Classes::parse(string row)
 bool Plane::operator<(Plane& p2)
 {	
 	Plane p1 = (*this);
-	long long num1 = p1.flight_datatime.year*366*24*3600ll + p1.flight_datatime.month*31*24*3600ll + p1.flight_datatime.day*24*3600ll
+/*	long long num1 = p1.flight_datatime.year*366*24*3600ll + p1.flight_datatime.month*31*24*3600ll + p1.flight_datatime.day*24*3600ll
 		+ p1.flight_datatime.hour*3600ll + p1.flight_datatime.minute*60ll + p1.flight_datatime.second;
 	long long num2 = p2.flight_datatime.year*366*24*3600ll + p2.flight_datatime.month*31*24*3600ll + p2.flight_datatime.day*24*3600ll
 		+ p2.flight_datatime.hour*3600ll + p2.flight_datatime.minute*60ll + p2.flight_datatime.second;
 	return num1 < num2;
-	/*
+	*/
 	if(p1.flight_datatime.year < p2.flight_datatime.year) return true;
 	if(p1.flight_datatime.year > p2.flight_datatime.year) return 0;
 	if(p1.flight_datatime.month < p2.flight_datatime.month) return true;
@@ -270,16 +270,18 @@ bool Plane::operator<(Plane& p2)
 	if(p1.flight_datatime.minute > p2.flight_datatime.minute) return 0;
 	if(p1.flight_datatime.second < p2.flight_datatime.second) return true;
 	if(p1.flight_datatime.second > p2.flight_datatime.second) return 0;
-	return false;*/
+	return false;
 }
 
 void output(string file, vector <int> position)
 {
+cout << "frgege";
   ifstream in_file(file);
-  ofstream out_file("data_set\\ans2.csv");
+  ofstream out_file("N:\\@text_files\\хакатон\\newHack\\data_set\\ans2.csv");
   string str;
   getline(in_file, str);
   out_file << str << endl;
+  cout << str << endl;
   int num = 0;
   while(getline(in_file, str))
   {

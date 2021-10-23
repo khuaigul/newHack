@@ -10,11 +10,11 @@ vector<int> solve(vector<Stand>& Stands, vector<Plane>& Planes)
 	tmp.flight_datatime.hour = 0;	
 	tmp.flight_datatime.minute = 0;
 	tmp.flight_datatime.second = 0;
-	vector<Plane> was(Stands.size(), tmp);
-	vector<int> ans(Planes.size());
+	vector<Plane> was(Stands.size() + 2, tmp);
+	vector<int> ans(Planes.size() + 1);	
 	for(auto plane: Planes)
 	{
-		long long mn = 1000000000000000;
+		long long mn = 1000000000000;
 		int poz = 0;
 		int bestm;
 		for(auto stand: Stands)
@@ -51,5 +51,6 @@ vector<int> solve(vector<Stand>& Stands, vector<Plane>& Planes)
 		was[poz] = plane;		
 		ans[plane.id] = poz;
 	}
+	cerr << ".";
 	return ans;		
 }
