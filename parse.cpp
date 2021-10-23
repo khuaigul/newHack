@@ -50,7 +50,7 @@ void Plane::parse(string row)
 		return;
 	id = T++;
 	string buf = "";
-	int num = 0;
+	int num = -1;
 	for (int i = 0; i < (int)row.size(); i++)
 	{
 		if (row[i] == ',')
@@ -252,6 +252,12 @@ void Aircraft_Classes::parse(string row)
 bool Plane::operator<(Plane& p2)
 {	
 	Plane p1 = (*this);
+	long long num1 = p1.flight_datatime.year*366*24*3600ll + p1.flight_datatime.month*31*24*3600ll + p1.flight_datatime.day*24*3600ll
+		+ p1.flight_datatime.hour*3600ll + p1.flight_datatime.minute*60ll + p1.flight_datatime.second;
+	long long num2 = p2.flight_datatime.year*366*24*3600ll + p2.flight_datatime.month*31*24*3600ll + p2.flight_datatime.day*24*3600ll
+		+ p2.flight_datatime.hour*3600ll + p2.flight_datatime.minute*60ll + p2.flight_datatime.second;
+	return num1 < num2;
+	/*
 	if(p1.flight_datatime.year < p2.flight_datatime.year) return true;
 	if(p1.flight_datatime.year > p2.flight_datatime.year) return 0;
 	if(p1.flight_datatime.month < p2.flight_datatime.month) return true;
@@ -264,5 +270,34 @@ bool Plane::operator<(Plane& p2)
 	if(p1.flight_datatime.minute > p2.flight_datatime.minute) return 0;
 	if(p1.flight_datatime.second < p2.flight_datatime.second) return true;
 	if(p1.flight_datatime.second > p2.flight_datatime.second) return 0;
-	return false;
+	return false;*/
+}
+
+void output(string file, vector <int> position)
+{
+  ifstream in_file(file);
+  ofstream out_file("./data_set/ans.csv");
+  string str;
+  getline(in_file, str);
+  out_file << str << endl;
+  int num = 0;
+  while(getline(in_file, str))
+  {
+    if ((int)str.size() != 0)
+    {
+      if (str[0] == ',')
+      {
+        out_file << str << endl;
+      }
+      else
+      {
+        string out = "";
+        for (int i = 0; i < (int)str.size(); i++)
+          if (i != (int)str.size()-1)
+            out += str[i];
+        out_file << out << ',' << position[num] << endl;
+        num++;
+      }
+    }
+  }
 }
