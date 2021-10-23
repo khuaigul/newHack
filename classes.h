@@ -2,7 +2,7 @@
 #define CLASSES_H
 #include <bits/stdc++.h>
 using namespace std;
-vector<int> solve(vector<Stand>& Stands, vector<Plane>& Planes);
+
 template<class T>
 void input(string file, vector<T>& data)
 {
@@ -105,5 +105,5 @@ struct Stand
 
 	void parse(string row); 
 };
-
+vector<int> solve(vector<Stand>& Stands, vector<Plane>& Planes);
 #endif
