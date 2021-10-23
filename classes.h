@@ -75,8 +75,10 @@ struct Datatime
 
 struct Plane
 {
+	int id;
 	char flight_AD;
 	Datatime flight_datatime;
+	Datatime spawn_datatime;
 	string flight_AL_Synchron_code;
 	int flight_number;
 	char flight_ID;
