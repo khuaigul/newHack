@@ -13,7 +13,7 @@ vector<int> solve(vector<Stand>& Stands, vector<Plane>& Planes)
 		int poz = 0;
 		for(auto stand: Stands)
 		{
-			int minute = stand.TaxiingTime;						
+			int minute = stand.Taxiing_Time;						
 			if(was[stand.Aircraft_Stand] < plane && cost(plane, stand) < mn)
 			{
 				mn = cost(plane, stand);

@@ -107,4 +107,5 @@ struct Stand
 };
 int cost(Plane plane, Stand stand);
 vector<int> solve(vector<Stand>& Stands, vector<Plane>& Planes);
+void output(string file, vector <int> position);
 #endif

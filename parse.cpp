@@ -13,6 +13,31 @@ void static_input(string file, void (*parse)(string row))
 	in_file.close();	
 }
 
+void output(string file, vector <int> position)
+{
+	ifstream in_file(file);
+	ofstream out_file("./data_set/ans.csv");
+	string str;
+	getline(in_file, str);
+	out_file << str << endl;
+	int num = 0;
+	while(getline(in_file, str))
+	{
+		if ((int)str.size() != 0)
+		{
+			if (str[0] == 'f')
+			{
+				out_file << str << endl;
+			}
+			else
+			{
+				out_file << str << "," << position[num] << endl;
+				num++;
+			}
+		}
+	}
+}
+
 void Stand::parse(string row)
 {
 	if (row[0] == 'A')
