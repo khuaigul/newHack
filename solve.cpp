@@ -1,7 +1,7 @@
 #include "classes.h"
 using namespace std;
 
-void solve(vector<Stand>& Stands, vector<Plane>& Planes)
+vector<int> solve(vector<Stand>& Stands, vector<Plane>& Planes)
 {
 	vector<Plane> was(Stands.size(), 0);
 	vector<int> ans(Planes.size());
