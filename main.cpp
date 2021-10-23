@@ -13,4 +13,5 @@ int main()
 	vector<Plane> Planes;
 	input("data_set/Timetable_Public.csv", Planes);
 	sort(Planes.begin(), Planes.end());
+	solve(Stands, Planes);
 }

@@ -43,11 +43,12 @@ void Stand::parse(string row)
 	}
 	Taxiing_Time = atoi(buf.c_str());
 }
-
+int T = 0;
 void Plane::parse(string row)
 {
 	if (row[0] == 'f')
 		return;
+	id = T++;
 	string buf = "";
 	int num = 0;
 	for (int i = 0; i < (int)row.size(); i++)
@@ -57,7 +58,9 @@ void Plane::parse(string row)
 			if (num == 0)
 				flight_AD = buf[0];
 			else if (num == 1)
-				flight_datatime.parse(buf);
+			{
+				flight_datatime.parse(buf);										 
+			}
 			else if (num == 2)
 				flight_AL_Synchron_code = buf;
 			else if (num == 3)
